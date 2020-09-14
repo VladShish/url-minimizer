@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Url minimizer</h1>
+    <p>A URL minimizer built with powerful tools to help you to minimize of urls.</p>
+
+    <div>
+        {{ form(form) }}
+    </div>
+
+    <div class="row">
+        {% for minimizeUrl in minimizesUrls %}
+            <div class="flash-error">
+                <div>{{ minimizeUrl.count }}</div>
+                <div>
+                    <a href="{{ minimizeUrl.hash }}" target="_blank">
+                        http://minimize.dev/{{ minimizeUrl.hash }}
+                    </a>
+                </div>
+                <br/>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

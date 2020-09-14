@@ -1,0 +1,6 @@
+index:
+    path: /
+    controller: App\Controller\MainPageController::index
+redirect_index:
+    path: /{hash}
+    controller: App\Controller\RedirectController::index
