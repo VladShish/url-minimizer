@@ -24,6 +24,24 @@ class MinimizeUrlRepository extends ServiceEntityRepository
 
     /**
      * @param MinimizeUrl $minimizeUrl
+     * @return bool
+     */
+    public function isExists(MinimizeUrl $minimizeUrl) : bool
+    {
+        return (bool)$this->findOneBy(['hash' => $minimizeUrl->getHash()]);
+    }
+
+    /**
+     * @param int $userId
+     * @return array
+     */
+    public function findByUserId(int $userId)
+    {
+        return $this->findBy(['userId' => $userId]);
+    }
+
+    /**
+     * @param MinimizeUrl $minimizeUrl
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

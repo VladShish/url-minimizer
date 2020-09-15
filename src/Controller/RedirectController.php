@@ -3,33 +3,45 @@
 
 namespace App\Controller;
 
-use App\Entity\MinimizeUrl;
-use App\Repository\MinimizeUrlRepository;
+use App\Application\RedirectPageProvider;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * Class RedirectController
+ * @package App\Controller
+ */
 class RedirectController extends AbstractController
 {
+
+    /**
+     * @var RedirectPageProvider
+     */
+    protected $redirectPageProvider;
+
+    /**
+     * RedirectController constructor.
+     * @param RedirectPageProvider $redirectPageProvider
+     */
+    public function __construct(
+        RedirectPageProvider $redirectPageProvider
+    ) {
+        $this->redirectPageProvider = $redirectPageProvider;
+    }
+
+    /**
+     * @param string $hash
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function index(string $hash)
     {
-        /** @var MinimizeUrlRepository $minimizeUrlRepo */
-        $minimizeUrlRepo = $this->getDoctrine()
-            ->getRepository(MinimizeUrl::class);
-
-        /** @var MinimizeUrl $minimizeUrl */
-        $minimizeUrl = $minimizeUrlRepo->findOneBy(['hash' => $hash]);
-        if (!$minimizeUrl || $minimizeUrl->isExpired()) {
-            if ($minimizeUrl) {
-                $minimizeUrlRepo->remove($minimizeUrl);
-            }
-
-            throw new \Exception("Not found");
-        }
-
-        $minimizeUrl->incrementPageView();
-        $minimizeUrlRepo->save($minimizeUrl);
+        $data = $this->redirectPageProvider->execute([
+            'hash' => $hash,
+        ]);
 
         return $this->redirect(
-            $minimizeUrl->getUrl()
+            $data['url'] ?? '/'
         );
     }
 }
