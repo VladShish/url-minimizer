@@ -3,6 +3,7 @@
 
 namespace App\Form\Type;
 
+use App\Entity\DateTimeExt;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,7 +23,9 @@ class UrlMinimizedType extends AbstractType
             ->add('url', TextType::class, [
                 'constraints' => [new UrlValidator()]
             ])
-            ->add('date_expire', DateTimeType::class)
+            ->add('date_expire', DateTimeType::class, [
+                'data' => new DateTimeExt('now'),
+            ])
             ->add('submit', SubmitType::class)
         ;
     }

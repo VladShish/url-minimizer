@@ -51,17 +51,19 @@ class RedirectPageProvider implements ServiceProviderInterface
     }
 
     /**
-     * @param MinimizeUrl $minimizeUrl
+     * @param MinimizeUrl|null $minimizeUrl
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     protected function validateMinimizeUrlEntity(
-        MinimizeUrl $minimizeUrl
+        ?MinimizeUrl $minimizeUrl
     ) {
-        if (!$minimizeUrl || $minimizeUrl->isExpired()) {
-            if ($minimizeUrl) {
-                $this->minimizeUrlRepo->remove($minimizeUrl);
-            }
+        if (!$minimizeUrl) {
+            throw new \Exception("Not found");
+        }
+
+        if ($minimizeUrl->isExpired()) {
+            $this->minimizeUrlRepo->remove($minimizeUrl);
 
             throw new \Exception("Not found");
         }

@@ -48,8 +48,8 @@ class MainPageProvider implements ServiceProviderInterface
         /** @var string $userId */
         $userId = $options['user_id'] ?? null;
 
-        $minimizeUrl->setUserId($userId);
         if ($form->isSubmitted() && $form->isValid()) {
+            $minimizeUrl->setUserId($userId);
             $this->submitLogic($minimizeUrl);
         }
 

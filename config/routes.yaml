@@ -4,3 +4,6 @@ index:
 redirect_index:
     path: /{hash}
     controller: App\Controller\RedirectController::index
+_errors:
+    resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+    prefix:   /_error
