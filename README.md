@@ -12,4 +12,7 @@
 ### copy code of minimize table and paste to mysql console     
     vim ~/data/sql/minimize_urls.sql
     
+### cache clear    
+    docker exec -it url-minimizer_php-fpm_1 ./bin/console cache:clear
+   
 http://localhost
