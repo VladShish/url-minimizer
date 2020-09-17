@@ -22,31 +22,31 @@ class MinimizeUrl
     protected $minimizedUrlId;
 
     /**
-     * @ORM\Column
+     * @ORM\Column(type="string", length=255)
      */
     protected $hash;
 
     /**
      * @var string
-     * @ORM\Column
+     * @ORM\Column(type="string", length=255)
      */
     protected $url;
 
     /**
      * @var string
-     * @ORM\Column
+     * @ORM\Column(type="datetime")
      */
     protected $dateExpire;
 
     /**
      * @var string
-     * @ORM\Column
+     * @ORM\Column(type="string", length=255)
      */
     protected $userId;
 
     /**
      * @var integer
-     * @ORM\Column
+     * @ORM\Column(type="integer")
      */
     protected $count;
 
