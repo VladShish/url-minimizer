@@ -28,19 +28,19 @@ class MinimizeUrl
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column
      */
     protected $url;
 
     /**
      * @var string
-     * @ORM\Column(type="datetime")
+     * @ORM\Column
      */
     protected $dateExpire;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column
      */
     protected $userId;
 
